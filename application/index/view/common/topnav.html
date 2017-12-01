@@ -1,0 +1,15 @@
+<div class="topnav">
+<a  href="#">猪小明的个人博客</a>
+ <div class="loginWrap">
+      {if condition="$username neq '' "}
+        欢迎  {$username}
+      {else /}
+        <a class="d" href="/index.php/index/login/index">登录</a>
+        <a href="/index.php/index/login/index">注册</a>
+      {/if}
+      <div class="operate">
+          <a class="operate1" href="/index.php/index/login/lgout">退出</a>
+          <a class="operate2" href="">修改密码</a>
+      </div>
+  </div>
+</div>

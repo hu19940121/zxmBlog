@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<link rel="Shortcut Icon" href="__PUBLIC__images/mylogo.ico" type="image/x-icon">
+
+<meta charset="utf-8">
+<title>个人博客</title>
+<link href="__PUBLIC__css/base.css" rel="stylesheet">
+<link href="__PUBLIC__css/main.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__js/jquery.js"></script>
+<style>
+/*分页样式*/
+.pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+.pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
+.pagination .active{background-color: #46A3FF;color: #fff;}
+.pagination .disabled{color:#aaa;}
+</style>
+</head>
+<body>
+<div id="wrapper">
+ {include file='common/header' /}
+<div class="container">
+  <div class="con_content">
+    <div class="about_box">
+      <h2 class="nh1"><span>您现在的位置是：<a href="/" target="_blank">网站首页</a>>><a href="#" target="_blank">个人相册</a></span><b>个人相册</b></h2>
+      <div class="lispic">
+        <ul>
+        {volist name='list' id='vo'}
+          <li><a href="#"><img src="/images/{$vo.imgurl}"><span>{$vo.imgtitle}</span></a></li>
+        {/volist}
+        </ul>
+      </div>
+      {$list->render()}
+
+    </div>
+  </div>
+  <div class="blank"></div>
+  <!-- container代码 结束 -->
+
+  {include file='common/footer' /}
+</div>
+</body>
+</html>

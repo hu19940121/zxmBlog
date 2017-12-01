@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<link rel="Shortcut Icon" href="__PUBLIC__images/mylogo.ico" type="image/x-icon">
+
+<meta charset="gb2312">
+<title>个人博客</title>
+<link href="__PUBLIC__css/base.css" rel="stylesheet">
+<link href="__PUBLIC__css/index.css" rel="stylesheet">
+<link href="__PUBLIC__css/animate.min.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__js/wow.min.js"></script>
+<style>
+/*分页样式*/
+.pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+.pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
+.pagination .active{background-color: #46A3FF;color: #fff;}
+.pagination .disabled{color:#aaa;}
+.loginWrap{display: inline-block;float:right;}
+.operate a{display: block;line-height:26px;}
+.operate a:hover{color:white;}
+.operate{display:none;background-color: rgba(0,0,0,0.5);}
+.btitle{width:70%;padding-top:4px;padding-bottom:4px;}
+@keyframes changeCol{
+    from
+    {
+      background-color:none;
+    }
+    to
+    {
+      background-color:rgba(0,0,0,0.3);
+    }
+
+}
+
+.btitle:hover{
+  animation:changeCol 1s;
+   animation-fill-mode:forwards;
+}
+</style>
+</head>
+<body>
+{include file='common/topnav' /}
+<div id="wrapper">
+ {include file='common/header' /}
+  <div class="jztop"></div>
+  <div class="container">
+    <div class="bloglist f_l  fadeInLeft  animated">
+    {volist name='list' id='vo'}
+      <div>
+         <h3 class="btitle"><a href="/index.php/index/index/artdetail?id={$vo.id}">{$vo.title}</a></h3>
+        <figure>
+        {if condition="$vo['pic'] neq ''"}
+        <img src="/images/{$vo.pic}" alt="">
+        {else /}
+        暂无缩略图
+        {/if}
+        </figure>
+        <ul>
+          <p><?php  echo mb_substr(preg_replace("/<(.*?)>/","",$vo['content']),0,100,'utf-8');  ?>....</p>
+          <a title=""  href="/index.php/index/index/artdetail?id={$vo.id}" class="readmore">阅读全文&gt;&gt;</a>
+        </ul>
+         <p class="dateview"><span>{$vo.time|date="Y-m-d",###}</span><span>作者：{$vo.author}</span><span>个人博客：[<a href="/jstt/bj/">{$vo.classname}</a>]</span></p>
+      </div>
+      {/volist}
+       {$list->render()}
+    </div>
+
+    <div class="r_box f_r  fadeInRight  animated">
+      <div class="tit01">
+        <h3 class="tit">关注我</h3>
+        <div class="gzwm">
+          <ul>
+            <li><a class="email" href="#" target="_blank">我的电话</a></li>
+            <li><a class="qq" href="#mailto:admin@admin.com" target="_blank">我的邮箱</a></li>
+            <li><a class="tel" href="#" target="_blank">我的QQ</a></li>
+            <li><a class="prize" href="#">个人奖项</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--tit01 end-->
+
+      <div class="tuwen">
+        <h3 class="tit">图文推荐</h3>
+        <ul>
+          <li><a href="/"><img src="__PUBLIC__images/01.jpg"><b>住在手机里的朋友</b></a>
+            <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+          </li>
+          <li><a href="/"><img src="__PUBLIC__images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
+            <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+          </li>
+          <li><a href="/" title="手机的16个惊人小秘密，据说99.999%的人都不知"><img src="__PUBLIC__images/03.jpg"><b>手机的16个惊人小秘密，据说...</b></a>
+            <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+          </li>
+          <li><a href="/"><img src="__PUBLIC__images/06.jpg"><b>住在手机里的朋友</b></a>
+            <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+          </li>
+          <li><a href="/"><img src="__PUBLIC__images/04.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
+            <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+          </li>
+          <li><a href="/"><img src="__PUBLIC__images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
+            <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+          </li>
+          <li><a href="/" title="手机的16个惊人小秘密，据说99.999%的人都不知"><img src="__PUBLIC__images/03.jpg"><b>手机的16个惊人小秘密，据说...</b></a>
+            <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
+          </li>
+        </ul>
+      </div>
+      <div class="ph">
+        <h3 class="tit">点击排行</h3>
+        <ul class="rank">
+          {volist name='rank' id='vo'}
+          <li>
+              <a href="/index.php/index/index/artdetail?id={$vo.id}">{$vo.title}
+             </a>
+          </li>
+          {/volist}
+        </ul>
+      </div>
+      <div class="ad"> <img src="__PUBLIC__images/03.jpg"> </div>
+    </div>
+  </div>
+  <!-- container代码 结束 -->
+  <div class="jzend"></div>
+  {include file='common/footer' /}
+</div>
+
+</body>
+<script>
+     if ($('.d').html()==null) {
+       $('.loginWrap').click(function(){
+
+        $('.operate').slideToggle();
+      })
+
+     };
+$('.btitle').hover(function(){
+  $(this).animate({
+    width:"90%",
+    textIndent:'60px',
+  })
+
+
+},function(){
+   $(this).animate({
+    width:"70%",
+    textIndent:'0px',
+
+  })
+
+
+})
+
+  </script>
+</html>

@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人博客</title>
+<link rel="Shortcut Icon" href="__PUBLIC__images/mylogo.ico" type="image/x-icon">
+
+<link href="__PUBLIC__css/base.css" rel="stylesheet">
+<link href="__PUBLIC__css/main.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__js/jquery.js"></script>
+<style type="text/css">
+ .commentWrap{overflow:hidden;margin-top:60px;font-family:"微软雅黑";}
+ .headimg,.comment{float:left;}
+ .headimg{width: 6%;height: 60px;} .headimg img{width:100%;height: 100%;}
+ .comment{width: 70%;height: 140px;margin-left:10px;}
+ .comment textarea{width: 100%;height: 110px;}
+ .comment input{width: 80px;height: 25px;background-color: orange;color:white;}
+ .tip{font-size:23px;line-height:50px;}
+ .commentlist h4{font-size:16px;font-weight:bold;font-family:"微软雅黑";}
+ .listWrap p{line-height:30px;}
+ .listWrap li{border-top:1px solid gray;}
+.listWrap li li{border:none;}
+ .top{color:#777777;font-size:15px;}
+ .pcontent{font-size:15px;color:black;font-family:"微软雅黑";}
+ .reply{padding-bottom:10px;}
+ .reply a{color:gray;}
+ .username{color:blue;}
+  .huifu{width: 70%;height: 140px;margin-left:10px;padding-top:20px;padding-bottom: 10px;display: none;}
+ .huifu textarea{width: 100%;height: 110px;}
+ .huifu input{width: 80px;height: 25px;background-color: orange;color:white;}
+ .towho{color:green;}
+ .loginWrap{display: inline-block;float:right;}
+.operate a{display: block;line-height:26px;}
+.operate a:hover{color:white;}
+.operate{display:none;background-color: rgba(0,0,0,0.5);}
+</style>
+</head>
+<body>
+{include file='common/topnav' /}
+<div id="wrapper">
+{include file='common/header' /}
+  <div class="container">
+    <div class="con_content">
+      <div class="about_box">
+        <h2 class="nh1"><span>您现在的位置是：<a href="/index.php/index/index/index" >网站首页</a>>><a href="#">文章详情</a></span><b>文章详情</b></h2>
+        <div class="f_box">
+          <p class="a_title">{$list.title}</p>
+          <p class="p_title"></p>
+            <p class="box_p"><span>发布时间：{$list.time|date="Y-m-d h:i:s",###}</span><span>作者：{$list.author}</span><span>点击：{$list.read}</span></p>
+          <!-- 可用于内容模板 -->
+        </div>
+        <ul class="about_content">
+            {$list.content}
+        </ul>
+            <div class="nextinfos">
+      <p>上一篇：{if condition="$prev['id'] neq '' " }
+      <a href="/index.php/index/index/artdetail?id={$prev.id}">
+      {$prev.title}
+      {else /}
+      没有了
+      {/if}
+      </a></p>
+      <p>下一篇：{if condition="$next['id'] neq '' " }
+      <a href="/index.php/index/index/artdetail?id={$next.id}">
+      {$next.title}
+      {else /}
+      没有了
+      {/if}</a></p>
+    </div>
+        <!-- 可用于内容模板 -->
+      <!-- 评论区域 -->
+          <div class="commentWrap">
+            <p class="tip">快点留下你的脚印吧</p>
+            <div class="headimg">
+              <img src="__PUBLIC__images/header.jpg" alt="">
+            </div>
+            <div class="comment">
+                <form action="/index.php/index/index/comment" method="post">
+                    <input type="hidden" name="artid" value="{$list.id}">
+                    <textarea id="pcontent" placeholder="我有话说...." name="comment"></textarea>
+                    <input  id="fbtn" type="submit" name="" value="发布">
+                </form>
+            </div>
+          </div>
+          <div class="commentlist">
+           <h4 >最新评论:</h4>
+            <ul class="listWrap">
+              {if condition="$plist neq null "}
+                 {volist name="plist" id='vo'}
+                <li>
+                   <p class="top">
+                      <span class="username">{$vo.uname}</span>：{$vo.time|date="Y-m-d h:i:s",###}
+                   </p>
+                   <p class="pcontent">
+                      {$vo.content}
+                   </p>
+                    <div class="reply">
+                      <a href="#">顶</a>
+                      <span class="reply1" href="#">回复</span>
+                      <a href="#">分享 >></a>
+                      <div class="huifu">
+                        <form action="/index.php/index/index/reply" method="post">
+                          <input type="hidden" name="pid" value="{$vo.id}">
+                          <input type="hidden" name="towhoid" value="{$vo.uid}">
+                          <input type="hidden" name="artid" value="{$list.id}">
+                          <textarea id="pcontent" placeholder="我有话说...." name="rcontent"></textarea>
+                          <input  class="hbtn" type="submit" name="" value="回复">
+                        </form>
+                      </div>
+                    </div>
+
+                    {volist name="hlist" id='voh'}
+                     {if condition="$vo['id'] eq $voh['pid']"}
+                      <div style="margin-left:20px" class="innereply" >
+
+                       <p class="top">
+                        <?php echo str_repeat('&nbsp;', $voh['level']*3)?><span class="username">{$voh.uname}</span>：{$voh.time|date="Y-m-d h:i:s",###} 回复给:<span class="towho">{$voh.touname}</span>
+                       </p>
+                       <p class="pcontent">
+                         <?php echo str_repeat('&nbsp;', $voh['level']*10) ?>{$voh.rcontent}
+                       </p>
+
+                       <div class="reply">
+                        <a href="#"><?php echo str_repeat('&nbsp;', $voh['level']*4) ?>顶</a>
+                        <span class="reply1" href="#">回复</span>
+                        <a href="#">分享 >></a>
+                        <div class="huifu">
+                          <form action="/index.php/index/index/innereply" method="post">
+                            <input type="hidden" name="pid" value="{$vo.id}">
+                            <input type="hidden" name="rid" value="{$voh.id}">
+                            <input type="hidden" name="towhoid" value="{$voh.uid}">
+                            <input type="hidden" name="artid" value="{$list.id}">
+                            <textarea id="pcontent" placeholder="我有话说...." name="rcontent"></textarea>
+                            <input  class="hbtn" type="submit" name="" value="回复">
+                          </form>
+                        </div>
+                       </div>
+
+                    </div>
+                    {else /}
+                    {/if}
+
+                    {/volist}
+                </li>
+              {/volist}
+
+
+              {else /}
+                此文章暂无评论
+              {/if}
+
+
+              </ul>
+          </div>
+        <!-- container代码 结束 -->
+      </div>
+    </div>
+    <div class="blank"></div>
+  </div>
+  <!-- container代码 结束 -->
+
+{include file='common/footer' /}
+</div>
+</body>
+<script>
+  $('#fbtn').click(function(){
+    if ($('#pcontent').val()=='') {
+      alert('请输入评论内容');
+      return false;
+    };
+
+  });
+
+ $('.hbtn').click(function(){
+
+    if ($(this).siblings('textarea').val()=='') {
+      alert('请输入评论内容');
+      return false;
+    };
+
+
+  })
+
+
+  $('.reply1').click(function(){
+    $(this).siblings('.huifu').toggle();
+  })
+</script>
+<script>
+if ($('.d').html()==null) {
+   $('.loginWrap').click(function(){
+
+        $('.operate').slideToggle();
+    })
+
+};
+
+
+
+</script>
+</html>

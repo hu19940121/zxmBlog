@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<link rel="Shortcut Icon" href="__PUBLIC__images/mylogo.ico" type="image/x-icon">
+
+<meta charset="gb2312">
+<title>个人博客</title>
+<link href="__PUBLIC__css/base.css" rel="stylesheet">
+<link href="__PUBLIC__css/main.css" rel="stylesheet">
+<link href="__PUBLIC__css/animate.min.css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__js/wow.min.js"></script>
+<style>
+/*分页样式*/
+.pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+.pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
+.pagination .active{background-color: #46A3FF;color: #fff;}
+.pagination .disabled{color:#aaa;}
+</style>
+</head>
+<body>
+<div id="wrapper">
+ {include file='common/header' /}
+<div class="container">
+  <div class="con_content">
+    <div class="about_box">
+      <h2 class="nh1"><span>您现在的位置是：<a href="/index.php/index/index/index" >网站首页</a>>><a href="#">个人日记</a></span><b>个人日记</b></h2>
+      <div class="dtxw box">
+      {volist name='list' id='vo'}
+        <li class="wow flipInX  animated">
+          <div class="dttext f_l">
+            <ul>
+              <h2><a href="/index.php/index/diary/artdetail?id={$vo.id}">{$vo.title}</a></h2>
+              <p><?php  echo mb_substr(preg_replace("/<(.*?)>/","",$vo['content']),0,100,'utf-8');  ?>....</p>
+              <span>{$vo.time|date="Y-m-d",###}</span>
+            </ul>
+          </div>
+          <div class="xwpic f_r">
+            {if condition="$vo['pic'] neq '' " }
+                <a href="#"><img src="/images/{$vo.pic}"></a>
+            {else /}
+              暂无缩略图
+            {/if}
+
+          </div>
+        </li>
+      {/volist}
+      </div>
+      {$list->render()}
+
+    </div>
+  </div>
+  <div class="blank"></div>
+  <!-- container代码 结束 -->
+
+ {include file='common/footer' /}
+</div>
+</body>
+</html>

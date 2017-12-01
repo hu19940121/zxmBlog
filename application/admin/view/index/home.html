@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html><head>
+<link rel="Shortcut Icon" href="__APUBLIC__images/mylogo.ico" type="image/x-icon">
+
+        <meta charset="utf-8">
+    <title></title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__APUBLIC__style/bootstrap.css" rel="stylesheet">
+    <link href="__APUBLIC__style/font-awesome.css" rel="stylesheet">
+    <link href="__APUBLIC__style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__APUBLIC__style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__APUBLIC__style/demo.css" rel="stylesheet">
+    <link href="__APUBLIC__style/typicons.css" rel="stylesheet">
+    <link href="__APUBLIC__style/animate.css" rel="stylesheet">
+<style type="text/css">
+
+    .home{margin-top:80px;width: 328px;margin:0 auto;color:green;font-size:40px;font-family:"微软雅黑";}
+</style>
+</head>
+<body>
+    <!-- 头部 -->
+    {include file="common/header" /}
+    <!-- /头部 -->
+
+    <div class="main-container container-fluid">
+        <div class="page-container">
+                        <!-- Page Sidebar -->
+         {include file="common/left" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content home">
+                    欢迎{$name}进入后台!!!
+            </div>
+            <!-- /Page Content -->
+        </div>
+    </div>
+
+        <!--Basic Scripts-->
+    <script src="__APUBLIC__style/jquery_002.js"></script>
+    <script src="__APUBLIC__style/bootstrap.js"></script>
+    <script src="__APUBLIC__style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__APUBLIC__style/beyond.js"></script>
+
+
+
+</body></html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<link rel="Shortcut Icon" href="__PUBLIC__images/mylogo.ico" type="image/x-icon">
+
+<meta charset="utf-8">
+<title>个人博客</title>
+<link href="__PUBLIC__css/base.css" rel="stylesheet">
+<link href="__PUBLIC__css/main.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__js/jquery.js"></script>
+</head>
+<body>
+<div id="wrapper">
+{include file='common/header' /}
+  <div class="container">
+    <div class="con_content">
+      <div class="about_box">
+        <h2 class="nh1"><span>您现在的位置是：<a href="/index.php/index/index/index" >网站首页</a>>><a href="#" >日记详情</a></span><b>日记详情</b></h2>
+        <div class="f_box">
+          <p class="a_title">{$list.title}</p>
+          <p class="p_title"></p>
+            <p class="box_p"><span>发布时间：{$list.time|date="Y-m-d h:i:s",###}</span></p>
+          <!-- 可用于内容模板 -->
+        </div>
+        <ul class="about_content">
+            {$list.content}
+        </ul>
+            <div class="nextinfos">
+      <p>上一篇：{if condition="$prev['id'] neq '' " }
+      <a href="/index.php/index/diary/artdetail?id={$prev.id}">
+      {$prev.title}
+      {else /}
+      没有了
+      {/if}
+      </a></p>
+      <p>下一篇：{if condition="$next['id'] neq '' " }
+      <a href="/index.php/index/diary/artdetail?id={$next.id}">
+      {$next.title}
+      {else /}
+      没有了
+      {/if}</a></p>
+    </div>
+        <!-- 可用于内容模板 -->
+
+        <!-- container代码 结束 -->
+      </div>
+    </div>
+    <div class="blank"></div>
+  </div>
+  <!-- container代码 结束 -->
+
+{include file='common/footer' /}
+</div>
+</body>
+</html>
